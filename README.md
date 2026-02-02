@@ -1,174 +1,179 @@
-# Student Data Management System Lab
+# Student Data Management System
 
-## Learning Goals
+A Python-based student records management system demonstrating efficient data structures and operations.
 
-- Utilize **lists, tuples, and sets** to store and manage student records.
-- Apply **list comprehensions** and **dictionary comprehensions** for efficient data filtering.
-- Use **generator expressions** to process large datasets efficiently.
-- Implement **set operations** for tracking unique student attributes.
-- Structure a Python application with modular data management techniques.
+## About
 
-## Introduction
+Student Data Management System is a modular Python application that allows administrators to store, filter, and process student records efficiently. The application showcases Python's core data structures including lists, tuples, sets, and generators for handling student information.
 
-In this lab, you will build a **Student Data Management System** that allows users to store, filter, and process student records efficiently. The system will enable users to:
+## Features
 
-- Store and retrieve student information using **lists, tuples, and sets**.
-- Filter student data dynamically using **list comprehensions** and **dictionary comprehensions**.
-- Process large student datasets efficiently using **generator expressions**.
-- Track unique student attributes (e.g., **majors, completed courses**) using **sets**.
+- **Student Records Storage**: Manage student data using tuples and lists
+- **Dynamic Filtering**: Filter students by major using list comprehensions
+- **Formatted Display**: Clean, readable output for student information
+- **Unique Attribute Tracking**: Extract unique majors using set operations
+- **Memory-Efficient Processing**: Generator expressions for large datasets
+- **Case-Insensitive Search**: Robust filtering regardless of input case
+- **Comprehensive Testing**: Full test suite with pytest
 
-This lab will help you apply Python **data structures** to solve real-world problems efficiently and dynamically.
+## Technologies Used
 
-## Setup Instructions
+- **Python 3.x** - Programming language
+- **pytest** - Testing framework
+- **pipenv** - Dependency management
 
-### Fork and Clone the Repository
+## Installation
 
-1. Go to the provided GitHub repository link.
-2. Fork the repository to your GitHub account.
-3. Clone the forked repository to your local machine using:
-   ```sh
-   git clone <repo-url>
-   cd course-7-module-1-python-data-structures-lab
-   ```
-
-### Install Dependencies
-
-Ensure **Python** is installed:
+Clone the repository:
 ```sh
-python --version
+git clone <repo-url>
+cd course-7-module-1-python-data-structures-lab
 ```
 
-Run the following command to install dependencies:
+Install dependencies:
 ```sh
 pipenv install
 ```
 
-Run the following to enter the virtual environment:
+Enter the virtual environment:
 ```sh
 pipenv shell
 ```
 
-To run the test suite, use:
+Install pytest (if not already installed):
+```sh
+pip install pytest
+```
+
+## Running Tests
+
+Run the test suite:
 ```sh
 pytest -x
 ```
 
-## Tasks
+## Project Structure
+```
+course-7-module-1-python-data-structures-lab/
+├── student_data.py          # Student records storage
+├── filter.py                # List comprehension filtering
+├── data_processing.py       # Data formatting and display
+├── set_operations.py        # Set comprehension operations
+├── data_generator.py        # Generator expressions
+├── tests/                   # Test suite
+└── README.md
+```
 
-### Task 1: Define the Problem
+## Key Features Implementation
 
-The goal of this lab is to build a **Student Data Management System** that allows users to store, retrieve, and process student records efficiently. The system must provide the following capabilities:
-
-- Manage student records using **lists, tuples, and sets**.
-- Filter student data dynamically using **list comprehensions** and **set comprehensions**.
-- Process large datasets efficiently using **generator expressions**.
-- Track unique student attributes (e.g., completed courses) using **sets**.
-
-The key challenge is to apply **efficient Python data structures** to dynamically handle, filter, and process student information.
-
----
-
-### Task 2: Determine the Design
-
-The **Student Data Management System** will be built using structured data handling techniques, including:
-
-- **Lists & Tuples**: Store student data in structured collections.
-- **List Comprehensions & Generator Expressions**: Process and filter student records efficiently.
-- **Sets**: Track unique student data attributes such as completed courses and enrolled majors.
-
-#### Design Breakdown:
-- **Student list storage** using **tuples** and **lists**.
-- **Filtering capabilities** using **list comprehensions**.
-- **Memory-efficient data handling** with **generator expressions**.
-- **Tracking unique attributes** using **sets**.
-
-This structured approach ensures an **efficient, maintainable, and scalable** student data system.
-
----
-
-### Task 3: Develop the Code
-
-#### Step 1: Define Student Records using Lists and Tuples
-
-In `student_data.py`, define a list of students as tuples. You can use the example below,
-or make up your own student data.
-
+### Student Records Storage
+Students are stored as tuples containing (ID, Name, Major) for data integrity:
 ```python
-# List of students stored as tuples (ID, Name, Major)
 students = [
     (101, "Alice Johnson", "Computer Science"),
     (102, "Bob Smith", "Mathematics"),
     (103, "Charlie Davis", "Physics"),
-    (104, "David Wilson", "Computer Science"),
-    (105, "Eve Lewis", "Mathematics"),
 ]
 ```
 
-#### Step 2: Filtering Students Using List Comprehensions
-
-In `filter.py`, edit the `filter_students_by_major` function to return a filtered list
-of students given a major using a list comprehension.
-
-#### Step 3: Displaying Student Data
-
-In `data_processing.py`, edit the `format_student_data` function to return a string for a given student formatted like:
+### Filtering by Major
+Case-insensitive filtering using list comprehensions:
 ```python
-"ID: 10 | Name: Louis Medina | Major: Computer Science"
+def filter_students_by_major(student_list, major):
+    return [student for student in student_list if student[2].lower() == major.lower()]
 ```
 
-#### Step 4: Displaying All Students' Data
-
-In `data_processing.py`, edit the `display_students` function to loop through all students and print each student's
-details using the `format_student_data` function.
-
-#### Step 5: Updating Student Courses Using Set Operations
-
-In `set_operations.py`, edit the `unique_majors` function to return a set of unique student
-majors using set comprehension. For example, given a list of students like:
+### Data Display
+Formatted output for clean presentation:
 ```python
-[
-    (101, "Miles", "Mathematics"),
-    (102, "Laura", "Mathematics"),
-    (103, "Benji", "Physics"),
-    (104, "Natalia", "Physics"),
-    (105, "Nadia", "Mathematics"),
-]
-```
-the `unique_majors` function should return (in no particular order):
-```python
-{"Mathematics", "Physics"}
+# Output: "ID: 101 | Name: Alice Johnson | Major: Computer Science"
 ```
 
-#### Step 6: Create a Student List Generator by Major
-
-In `data_generator.py`, edit the `student_generator` function to return a generator expression
-for all students by major. Example of a generator expression:
-
+### Unique Major Extraction
+Set comprehension for efficient unique value extraction:
 ```python
-(item_to_return for item_in_iterable in iterable if condition)
-
-# more concrete example:
-number_list = [1,2,3,4,5,6]
-generator_expression = (n * 2 for n in number_list if n > 3)
+def unique_majors(student_list):
+    return {student[2] for student in student_list}
 ```
 
+### Memory-Efficient Processing
+Generator expressions for lazy evaluation:
+```python
+def student_generator(student_list, major):
+    return (student for student in student_list if student[2] == major)
+```
 
----
+## Core Python Concepts
 
-## Best Practices for Managing Student Data
+This project demonstrates mastery of:
 
-- **Use comments** to clarify logic.
-- **Optimize lookups** with dictionary `.get()` method.
-- **Use set operations** for efficient course tracking.
-- **Apply generator expressions** for memory efficiency.
-- **Update README** to document functionality.
+- **Lists & Tuples**: Structured data storage with immutability
+- **List Comprehensions**: Efficient one-line filtering operations
+- **Set Comprehensions**: Extracting unique values from sequences
+- **Generator Expressions**: Memory-efficient lazy evaluation
+- **f-strings**: Modern string formatting
+- **Modular Design**: Separation of concerns across multiple files
 
-## Conclusion
+## Learning Goals Achieved
 
-By mastering **Sequences, List Comprehensions, Generator Expressions, Dictionaries, and Sets**, developers can:
+✅ Store and manage student records using lists, tuples, and sets  
+✅ Apply list comprehensions for efficient data filtering  
+✅ Use generator expressions to process large datasets efficiently  
+✅ Implement set operations for tracking unique attributes  
+✅ Structure a Python application with modular techniques  
 
-- Optimize **student data storage and retrieval**.
-- Enhance **performance using efficient data structures**.
-- Improve **scalability using structured data management techniques**.
+## Best Practices Applied
 
-This lab ensures real-world applicability of Python **data structures** in managing dynamic, scalable, and efficient datasets.
+- Modular code organization across multiple files
+- Case-insensitive filtering for robust user input handling
+- Generator expressions for memory efficiency
+- Set operations for O(1) lookup performance
+- Comprehensive docstrings for all functions
+- Full test coverage
+
+## Development
+
+### Available Commands
+
+- `pipenv shell` - Activate virtual environment
+- `pytest -x` - Run test suite (stop on first failure)
+- `python -i student_data.py` - Interactive Python shell with student data
+
+## Troubleshooting
+
+**pytest: command not found**
+```sh
+pip install pytest
+# or
+pip3 install pytest
+```
+
+**ModuleNotFoundError**
+```sh
+pipenv install
+pipenv shell
+```
+
+## Future Enhancements
+
+- Add student course enrollment tracking
+- Implement GPA calculations
+- Add database persistence (SQLite)
+- Create CLI interface for user interaction
+- Add data validation and error handling
+- Export student data to CSV/JSON
+
+## Author
+
+**Shobinn Clark**
+- GitHub: [@shobinn24](https://github.com/shobinn24)
+- Flatiron School - Full-Stack Software Engineering Program
+
+## License
+
+This project was created as part of the Flatiron School curriculum.
+
+## Acknowledgments
+
+- Flatiron School for project requirements and guidance
+- Python community for excellent documentation
